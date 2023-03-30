@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+</head>
+<body>
+    {% for dato in datos %}
+    <form method="post" id="update-form" action="http://127.0.0.1:8000/update/">
+        {% csrf_token %}
+        <label for="name">Nombre:</label>
+        <input type="text" name="name" id="name" value="{{dato.name}}" required>
+        <label for="name">Precio:</label>
+        <input type="text" name="price" id="price" v alue="{{dato.company_name}}" required>
+        <label for="name">Descripción</label>
+        <input type="text" name="description" id="description" value="{{dato.mobile}}" required>
+        <label for="name">Stock:</label>
+        <input type="text" name="stock" id="stock" value="{{dato.picking_warn_msg}}" required>
+        <button type="submit">Actualizar</button>
+    </form>
+    
+
+    <script>
+        const form = document.getElementById("update-form");
+        const nameInput = document.getElementById("name");
+        const priceInput = document.getElementById("price");
+        const descriptionInput = document.getElementById("description");
+        const stockInput = document.getElementById("stock");
+
+        form.addEventListener("submit", function(event) {
+            console.log('kcqklsjlqsk')
+            event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+            const name = nameInput.value;
+            const price = priceInput.value;
+            const description = descriptionInput.value;
+            const stock = stockInput.value;
+
+            form.action = `http://127.0.0.1:8000/update/{{dato.id}}/${name}/${price}/${description}/${stock}`;
+            form.submit();
+        });
+    </script>
+    {% endfor %}
+</body>
+</html>
